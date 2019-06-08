@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//rpz105.com">
-  <title>1 初次接触空间配置器 | 那个叫西105的地方</title>
+  <title>01 初次接触空间配置器 | 那个叫西105的地方</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="初次接触空间配置器前言SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇new实现再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的alloc实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.   “new”的实现这里直接我们直接来看S">
+  <meta name="description" content="前言SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇new实现再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的alloc实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.">
 <meta name="keywords" content="C++,STL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1 初次接触空间配置器">
+<meta property="og:title" content="01 初次接触空间配置器">
 <meta property="og:url" content="//rpz105.com/ed459fe0.html">
 <meta property="og:site_name" content="那个叫西105的地方">
-<meta property="og:description" content="初次接触空间配置器前言SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇new实现再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的alloc实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.   “new”的实现这里直接我们直接来看S">
+<meta property="og:description" content="前言SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇new实现再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的alloc实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-08T14:07:46.473Z">
+<meta property="og:updated_time" content="2019-06-08T14:11:00.614Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1 初次接触空间配置器">
-<meta name="twitter:description" content="初次接触空间配置器前言SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇new实现再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的alloc实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.   “new”的实现这里直接我们直接来看S">
+<meta name="twitter:title" content="01 初次接触空间配置器">
+<meta name="twitter:description" content="前言SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇new实现再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的alloc实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.">
   
     <link rel="alternative" href="/atom.xml" title="那个叫西105的地方" type="application/atom+xml">
   
@@ -154,7 +154,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      1 初次接触空间配置器
+      01 初次接触空间配置器
     </h1>
   
 
@@ -167,7 +167,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="初次接触空间配置器"><a href="#初次接触空间配置器" class="headerlink" title="初次接触空间配置器"></a>初次接触空间配置器</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇<a href="https://blog.csdn.net/Function_Dou/article/details/84526761">new实现</a>再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的<code>alloc</code>实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇<a href="https://blog.csdn.net/Function_Dou/article/details/84526761">new实现</a>再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的<code>alloc</code>实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.</p>
+<a id="more"></a>
+
 <br>
 
 <h2 id="“new”的实现"><a href="#“new”的实现" class="headerlink" title="“new”的实现"></a>“new”的实现</h2><p>这里直接我们直接来看STL的<code>construct</code>实现吧</p>
