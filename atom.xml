@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="//rpz105.com/"/>
-  <updated>2019-06-08T13:19:24.017Z</updated>
+  <updated>2019-06-08T13:21:38.319Z</updated>
   <id>//rpz105.com/</id>
   
   <author>
@@ -20,17 +20,30 @@
     <title>tu</title>
     <link href="//rpz105.com//2ae52bbe.html"/>
     <id>//rpz105.com//2ae52bbe.html</id>
-    <published>2019-06-08T13:18:54.000Z</published>
-    <updated>2019-06-08T13:19:24.017Z</updated>
+    <published>2019-06-08T13:21:38.000Z</published>
+    <updated>2019-06-08T13:21:38.319Z</updated>
     
-    <content type="html"><![CDATA[<p>![web 客户程序](/web 客户程序.png)</p><p><img src="/2ae52bbe/%E8%BF%90%E7%BB%B4.png" alt="运维"></p>]]></content>
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>tu</title>
+    <link href="//rpz105.com//2ae52bbe.html"/>
+    <id>//rpz105.com//2ae52bbe.html</id>
+    <published>2019-06-08T13:20:28.000Z</published>
+    <updated>2019-06-08T13:21:35.335Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2ae52bbe/UDP%E9%80%9A%E4%BF%A12.png" alt="UDP通信2"></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;![web 客户程序](/web 客户程序.png)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/2ae52bbe/%E8%BF%90%E7%BB%B4.png&quot; alt=&quot;运维&quot;&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;img src=&quot;/2ae52bbe/UDP%E9%80%9A%E4%BF%A12.png&quot; alt=&quot;UDP通信2&quot;&gt;&lt;/p&gt;
 
       
     
