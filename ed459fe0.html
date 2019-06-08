@@ -147,91 +147,54 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-1-初次接触空间配置器" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
+    <% if (post.link || post.title){ %>
       <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      01 初次接触空间配置器
-    </h1>
-  
-
-        
-        <a href="/ed459fe0.html" class="archive-article-date">
-  	<time datetime="2019-06-08T14:06:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-08</time>
-</a>
-        
-      </header>
-    
-	<!-- 目录内容 -->
-			
-	<!-- 目录内容结束 -->
+        <%- partial('post title', {class_name: 'article-title'}) %>
+        <% if (!post.nodate){ %>
+        <%- partial('post date', {class_name: 'archive-article-date', date_format: null}) %>
+        <% } %>
+      </%></%-></%></%-></header>
+    <% } %>
+<!-- 目录内容 -->
+<% if (!index && post.toc){ %>
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+	<div id="toc-article" class="toc-article">
+	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+		<strong class="toc-title">文章目录</strong>
+           <%- toc(post.content) %>
+         </%-></div>
+   <script type="text/javascript">
+	function showToc(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:block");
+		show_toc_btn.setAttribute("style","display:none");
+		};
+	function showBtn(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:none");
+		show_toc_btn.setAttribute("style","display:block");
+		};
+   </script>
+      <% } %>
+<!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇<a href="https://blog.csdn.net/Function_Dou/article/details/84526761">new实现</a>再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的<code>alloc</code>实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.</p>
-<a id="more"></a>
+      <% if (post.excerpt && index){ %>
+        <%- post.excerpt %>
+        <% if (theme.excerpt_link) { %>
+          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></%=></a>
+        <% } %>
+      <% } else { %>
+        <%- post.content %>
+      <% } %>
 
-<br>
-
-<h2 id="“new”的实现"><a href="#“new”的实现" class="headerlink" title="“new”的实现"></a>“new”的实现</h2><p>这里直接我们直接来看STL的<code>construct</code>实现吧</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里的construct调用的是placement new, 在一个已经获得的内存里建立一个对象</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="title">class</span> <span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">void</span> <span class="title">construct</span>(<span class="title">T1</span>* <span class="title">p</span>, <span class="title">const</span> <span class="title">T2</span>&amp; <span class="title">value</span>) </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">new</span> (p) T1(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以明白这里就只是一个<code>placement new</code>的调用, 只是用了泛型来实现一个对象分配的模板, 并实现初始化.</p>
-<p>既然已经看到了对象的分配, 那再接再厉看看空间的分配, 充分了解STL是怎么将new分开执行的. allocate函数实现空间的申请, 但是这里有一点看不出来, 申请内存是有分为一级配置器和二级配置器, 分配的空间小于128字节的就调用二级配置器, 大于就直接使用一级配置器, 一级配置器直接调用<code>malloc</code>申请, 二级使用内存池.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">T</span>* <span class="title">allocate</span>(<span class="title">ptrdiff_t</span> <span class="title">size</span>, <span class="title">T</span>*)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    set_new_handler(<span class="number">0</span>);</span><br><span class="line">    T* tmp = (T*)(::<span class="keyword">operator</span> <span class="keyword">new</span>(size)(size * <span class="keyword">sizeof</span>(T)));</span><br><span class="line">    <span class="keyword">if</span>(!tmp)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"out of memort"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>内存分配果然是调用<code>operator new</code>来执行空间分配, 这里allocate和construct都只是简单的对<code>operator new</code>进行封装.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">4</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	allocator&lt;<span class="built_in">string</span>&gt;  alloc;</span><br><span class="line">	<span class="keyword">auto</span> str_ve = alloc.allocate(N);</span><br><span class="line">	<span class="keyword">auto</span> p = str_ve;	<span class="comment">// vector&lt;string&gt; *p = str_ve;</span></span><br><span class="line">	alloc.construct(p++);</span><br><span class="line">	alloc.construct(p++, <span class="number">10</span>, <span class="string">'a'</span>);</span><br><span class="line">	alloc.construct(p++, <span class="string">"construct"</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str_ve[<span class="number">0</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; str_ve[<span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; str_ve[<span class="number">2</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(p != str_ve)</span><br><span class="line">	&#123;</span><br><span class="line">		alloc.destroy(--p);</span><br><span class="line">	&#125;</span><br><span class="line">	alloc.deallocate(str_ve, N);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果为</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpz@0505:stl3.0$ ./a.out </span><br><span class="line"></span><br><span class="line">aaaaaaaaaa</span><br><span class="line">construct</span><br></pre></td></tr></table></figure>
-
-<p>这个程序首先调用<code>allocate</code>申请N个大小的空间, 在依次<code>construct</code>调用构造函数, 这里就先初始化3个结构, 紧接着通过<code>destory</code>调用析构函数, 最后<code>deallocate</code>释放申请的空间. 整个过程很容易理解, 但是这里还要深入是dealllocate和destroy两个函数.</p>
-<br>
-
-<h2 id="“delete”实现"><a href="#“delete”实现" class="headerlink" title="“delete”实现"></a>“delete”实现</h2><p>先是看<code>destroy</code>调用析构函数. 而destroy有两个版本.</p>
-<p><strong>版本一:</strong></p>
-<p>需要传入的参数 : <strong>一个指针</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一版本, 接收指针</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">inline</span> <span class="title">void</span> <span class="title">destroy</span>(<span class="title">T</span>* <span class="title">pointer</span>) </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    pointer-&gt;~T();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>版本一直接就调用了析构函数, 不用过多的分析.</p>
-<br>
-
-<p><strong>版本二:</strong></p>
-<p>需要传入的参数 : <strong>两个迭代器</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二个版本的, 接受两个迭代器, 并设法找出元素的类型. 通过__type_trais&lt;&gt; 找出最佳措施</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">void</span> <span class="title">destroy</span>(<span class="title">ForwardIterator</span> <span class="title">first</span>, <span class="title">ForwardIterator</span> <span class="title">last</span>) </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  __destroy(first, last, value_type(first));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受两个迭代器, 以__type_trais&lt;&gt; 判断是否有traival destructor </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator</span>, <span class="title">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">void</span> __<span class="title">destroy</span>(<span class="title">ForwardIterator</span> <span class="title">first</span>, <span class="title">ForwardIterator</span> <span class="title">last</span>, <span class="title">T</span>*) </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">typename</span> __type_traits&lt;T&gt;::has_trivial_destructor trivial_destructor;</span><br><span class="line">  __destroy_aux(first, last, trivial_destructor());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>destroy直接调用<code>__destroy</code>, 前者只是一个接口, 所以重点是在后者.</p>
-<p>分析<code>__type_traits&lt;&gt;</code> : 它是用于获取迭代器所指对象的类型,运用traits技法实现的.只要记住我们用来获取对对象类型就可以了. 然后通过类型的不一样选择执行不同的析构调用.</p>
-<br>
-
-<p>当<code>__type_traits</code>为<code>__false_type</code>时, 调用的是下面这个函数, 通过迭代所有的对象并调用版本一的函数执行析构函数进行析构. 而这个是被称为<code>non-travial destructor</code></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有non-travial destructor </span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">void</span> __<span class="title">destroy_aux</span>(<span class="title">ForwardIterator</span> <span class="title">first</span>, <span class="title">ForwardIterator</span> <span class="title">last</span>, __<span class="title">false_type</span>) </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">for</span> ( ; first &lt; last; ++first)</span><br><span class="line">    destroy(&amp;*first);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>当<code>__type_traits</code>为<code>__true_type</code>时, 什么也不做, 因为这样效率很高效, 并不需要执行析构函数. 而这个是被称为<code>travial destructor</code>.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 有travial destructor</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ForwardIterator</span>&gt; </span></span><br><span class="line"><span class="class"><span class="title">inline</span> <span class="title">void</span> __<span class="title">destroy_aux</span>(<span class="title">ForwardIterator</span>, <span class="title">ForwardIterator</span>, __<span class="title">true_type</span>) &#123;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>最后是版本二的特化版, 同样也什么都不用做, 没有必要做析构.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">(<span class="keyword">char</span>*, <span class="keyword">char</span>*)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">(<span class="keyword">wchar_t</span>*, <span class="keyword">wchar_t</span>*)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>destroy分为这么几个版本和几个不同的函数执行都是为了提升效率, 较小的调用并不能看出什么, 但是如果是范围析构的话这样不同的选择析构能很节约时间和效率. </p>
-<br>
-
-<p>讲解完了destory后应该就能明白上面代码循环执行析构函数了.</p>
-<br>
-
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>这里用一个小小的例子来理解”new”和”delete”运算符, 理解new, delete每步分开执行, 内存释放(deallocate)这里没有讲解, 也只是简单的调用free函数. STL这样做1. 为了效率, 2. 为了构建内存池.</p>
-<p>最后将所有的函数进行封装到<code>allocator</code> , 所以例子中都是调用的构造析构等都是封装在该类中.</p>
-
-      
-
-      
+      <% 1 2 if ((theme.reward_type="==" || (theme.reward_type="==" && post.reward)) !index){ %>
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">
             <div class="tooltip tooltip-east">
@@ -241,149 +204,93 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></%=></p>
                   <div class="reward-box">
-                    
+                    <% if(theme.alipay) {%>
                     <div class="reward-box-item">
-                      <img class="reward-img" src="./assets/connect.png">
+                      <img class="reward-img" src="<%= theme.alipay%>">
                       <span class="reward-type">支付宝</span>
                     </div>
-                    
-                    
+                    <% } %>
+                    <% if(theme.weixin) {%>
                     <div class="reward-box-item">
-                      <img class="reward-img" src="rpz105/source/image/icon.jpg">
+                      <img class="reward-img" src="<%= theme.weixin%>">
                       <span class="reward-type">微信</span>
                     </div>
-                    
-                  </div>
+                    <% } %>
+                  </%></%></%></%></div>
                 </span>
               </span>
             </span>
           </div>
           </a>
         </div>
-      
-    </div>
+      <% } %>
+    </%></%></%></%-></%></%></%></%-></%></div>
     <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">STL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
+      <%if(post.top){%>
+        <div class="article-pop-out tagcloud">
+          <i class="icon-tuding"></i>
+          <a class="article-tag-list-link color3">置顶</a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
+      <% } %>
+      <%- partial('post tag') %>
+      <%- partial('post category') %>
+      <% if (index && theme.show_all_link){ %>
+        <p class="article-more-link">
+          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></%=></a>
+        </p>
+      <% } %>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://rpz105.com/ed459fe0.html" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
+      <% if (!index && theme.share_jia){ %>
+        <%- partial('post share') %>
+      <% } %>
       <div class="clearfix"></div>
-    </div>
-  </div>
+    </%></%-></%></%></%></%-></%-></%></%if(post.top){%></div>
+  </%></%></%></%></div>
 </article>
+<% if (!index){ %>
+  <%- partial('post nav') %>
+<% } %>
+<%- partial('_partial aside') %>
 
+
+<% if (!index && post.comments){ %>
+  <% if (theme.duoshuo){ %>
+  <%- partial('post duoshuo', { key: post.slug, title: post.title, url: config.url+url_for(post.path) }) %>
+  <% } %>
   
+  <% if (theme.wangyiyun){ %>
+  <%- partial('post wangyiyun', { key: post.slug, title: post.title, url: config.url+url_for(post.path) }) %>
+  <% } %>
 
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+  <% if (theme.changyan_appid && theme.changyan_conf){ %>
+  <%- partial('post changyan', { key: post.slug, title: post.title, url: config.url+url_for(post.path) }) %>
+  <% } %>
 
+  <% if (theme.disqus || config.disqus_shortname){ %>
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
 
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+  <% } %>
 
-  
-  
-  
-
-  
-  <div id="SOHUCS" sid="1-初次接触空间配置器"></div> 
-<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js"></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: "true",
-        conf: "true"
-    });
-</script>
-
-  
-
-  
-
-  
-
-
+  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth theme.gitment_oauth.client_id theme.gitment_oauth.client_secret){ %>
+  <%- partial('post gitment', { key: post.slug, title: post.title, url: config.url+url_for(post.path) }) %>
+  <% } %>
+<% } %>
+</%></%></%-></%></%></%></%></%-></%></%></%-></%></%></%-></%></%></%-></%></%-></%>
           </div>
         </div>
       </div>
