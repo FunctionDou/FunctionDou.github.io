@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="//rpz105.com/"/>
-  <updated>2019-06-08T13:48:08.550Z</updated>
+  <updated>2019-06-08T14:00:37.780Z</updated>
   <id>//rpz105.com/</id>
   
   <author>
@@ -20,111 +20,17 @@
     <title></title>
     <link href="//rpz105.com//0.html"/>
     <id>//rpz105.com//0.html</id>
-    <published>2019-06-08T13:48:08.550Z</published>
-    <updated>2019-06-08T13:48:08.550Z</updated>
+    <published>2019-06-08T14:00:37.780Z</published>
+    <updated>2019-06-08T14:00:37.780Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="/0/%E7%BC%96%E8%AF%91%E5%87%BA%E9%94%99.png" alt="编译出错"></p><p><img src="/0/%E4%BC%A0%E8%BE%93%E5%B1%82.png" alt="传输层"></p><p><img src="/0/%E8%BF%9B%E7%A8%8B%E6%B1%A02.png" alt="进程池2"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;/0/%E7%BC%96%E8%AF%91%E5%87%BA%E9%94%99.png&quot; alt=&quot;编译出错&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/0/%E4%BC%A0%E8%BE%93%E5%B1%82.png&quot; alt=&quot;传输层&quot;&gt;&lt;/p&gt;
-&lt;p
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>tu</title>
-    <link href="//rpz105.com//2ae52bbe.html"/>
-    <id>//rpz105.com//2ae52bbe.html</id>
-    <published>2019-06-08T13:21:38.000Z</published>
-    <updated>2019-06-08T13:21:41.359Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>tu</title>
-    <link href="//rpz105.com//2ae52bbe.html"/>
-    <id>//rpz105.com//2ae52bbe.html</id>
-    <published>2019-06-08T13:20:28.000Z</published>
-    <updated>2019-06-08T13:24:56.994Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/2ae52bbe/%E7%BC%96%E8%AF%91%E6%97%B6%E7%89%B9%E6%AE%8A%E5%8F%82%E6%95%B0.png" alt="编译时特殊参数"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="hello"><a href="#hello" class="headerlink" title="hello"></a>hello</h1><p>hello world</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;img src=&quot;/2ae52bbe/%E7%BC%96%E8%AF%91%E6%97%B6%E7%89%B9%E6%AE%8A%E5%8F%82%E6%95%B0.png&quot; alt=&quot;编译时特殊参数&quot;&gt;&lt;/p&gt;
+        &lt;h1 id=&quot;hello&quot;&gt;&lt;a href=&quot;#hello&quot; class=&quot;headerlink&quot; title=&quot;hello&quot;&gt;&lt;/a&gt;hello&lt;/h1&gt;&lt;p&gt;hello world&lt;/p&gt;
 
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>tupian</title>
-    <link href="//rpz105.com//ea96c741.html"/>
-    <id>//rpz105.com//ea96c741.html</id>
-    <published>2019-06-08T09:50:06.000Z</published>
-    <updated>2019-06-08T12:32:48.698Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/ea96c741/b74df51937b75966352ad1f137b2b07c.jpg" alt="b74df51937b75966352ad1f137b2b07c"></p><p><img src="/ea96c741/ELF%E7%9A%84data%E5%92%8Cbss%E6%AE%B5.png" alt="ELF的data和bss段"></p><p><img src="/ea96c741/ARP%E9%80%9A%E4%BF%A1.png" alt="ARP通信"></p><p><img src="/ea96c741/IO%E5%88%86%E7%A6%BB1.png" alt="IO分离1"></p><p><img src="/ea96c741/libevent%E4%B8%89%E4%B8%AA%E9%98%9F%E5%88%97.png" alt="libevent三个队列"></p><p><img src="/ea96c741/TCPIP%E5%8D%8F%E8%AE%AE.png" alt="TCPIP协议"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;/ea96c741/b74df51937b75966352ad1f137b2b07c.jpg&quot; alt=&quot;b74df51937b75966352ad1f137b2b07c&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/ea96c741/ELF%E7%9A%84
-      
-    
-    </summary>
-    
-    
-      <category term="tupian" scheme="//rpz105.com/tags/tupian/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hello hello</title>
-    <link href="//rpz105.com//12da640.html"/>
-    <id>//rpz105.com//12da640.html</id>
-    <published>2019-06-08T09:26:17.000Z</published>
-    <updated>2019-06-08T10:04:17.827Z</updated>
-    
-    <content type="html"><![CDATA[<p>asfiowe</p><p>waegwe</p><p>ear</p><p>he</p><p>rh</p><p>era</p><p>h</p><p>erah</p><p>aer</p><p>h</p><p>era</p><p>he</p><p>rah</p><p>re</p><p>h</p><p>rea</p><p>h</p><p>reah</p><p>erah</p><p>re</p><p>ah</p><p>erh</p><p>er</p><p>h</p><p>reah</p><p>re</p><p>ah</p><p>erahearh</p><p>earh</p><p>e</p><p>erah</p><p>rea</p><p>hre</p><p>ah</p><p>reh</p><p>rea</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;asfiowe&lt;/p&gt;
-&lt;p&gt;waegwe&lt;/p&gt;
-&lt;p&gt;ear&lt;/p&gt;
-&lt;p&gt;he&lt;/p&gt;
-&lt;p&gt;rh&lt;/p&gt;
-&lt;p&gt;era&lt;/p&gt;
-&lt;p&gt;h&lt;/p&gt;
-&lt;p&gt;erah&lt;/p&gt;
-&lt;p&gt;aer&lt;/p&gt;
-&lt;p&gt;h&lt;/p&gt;
-&lt;p&gt;era&lt;/p&gt;
-&lt;p&gt;he&lt;/p&gt;
-&lt;p&gt;rah&lt;
       
     
     </summary>
