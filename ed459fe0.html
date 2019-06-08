@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="那个叫西105的地方">
 <meta property="og:description" content="前言SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇new实现再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的alloc实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-08T16:07:15.406Z">
+<meta property="og:updated_time" content="2019-06-08T16:07:52.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="01 初次接触空间配置器">
 <meta name="twitter:description" content="前言SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇new实现再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的alloc实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.">
@@ -166,31 +166,7 @@
       </header>
     
 	<!-- 目录内容 -->
-	
-    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
-          <span class="btn-bg"></span>
-          <span class="btn-text">文章导航</span>
-          </p>
-	<div id="toc-article" class="toc-article">
-	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
-		<strong class="toc-title">文章目录</strong>
-           <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#“new”的实现"><span class="toc-number">2.</span> <span class="toc-text">“new”的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#“delete”实现"><span class="toc-number">3.</span> <span class="toc-text">“delete”实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
-         </div>
-   <script type="text/javascript">
-	function showToc(){
-		var toc_article = document.getElementById("toc-article");
-		var show_toc_btn = document.getElementById("show-toc-btn");
-		toc_article.setAttribute("style","display:block");
-		show_toc_btn.setAttribute("style","display:none");
-		};
-	function showBtn(){
-		var toc_article = document.getElementById("toc-article");
-		var show_toc_btn = document.getElementById("show-toc-btn");
-		toc_article.setAttribute("style","display:none");
-		show_toc_btn.setAttribute("style","display:block");
-		};
-   </script>
-      		
+			
 	<!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
@@ -381,19 +357,6 @@
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#“new”的实现"><span class="toc-number">2.</span> <span class="toc-text">“new”的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#“delete”实现"><span class="toc-number">3.</span> <span class="toc-text">“delete”实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
