@@ -18,8 +18,8 @@
   
   <entry>
     <title>01 初次接触空间配置器</title>
-    <link href="//rpz105.com//77212075.html"/>
-    <id>//rpz105.com//77212075.html</id>
+    <link href="//rpz105.com//blog/77212075.html"/>
+    <id>//rpz105.com//blog/77212075.html</id>
     <published>2019-06-09T07:43:50.000Z</published>
     <updated>2019-06-09T07:46:03.028Z</updated>
     
@@ -40,10 +40,10 @@
   
   <entry>
     <title>未来的一段计划</title>
-    <link href="//rpz105.com//3846751f.html"/>
-    <id>//rpz105.com//3846751f.html</id>
+    <link href="//rpz105.com//blog/3846751f.html"/>
+    <id>//rpz105.com//blog/3846751f.html</id>
     <published>2019-06-09T07:41:04.000Z</published>
-    <updated>2019-06-09T07:45:20.728Z</updated>
+    <updated>2019-06-09T07:47:28.833Z</updated>
     
     <content type="html"><![CDATA[<p>未来三个月左右的时间可能不怎么会更新新的博客了, 我会暂时将CSDN上面的部分博客(如 : STL以及网络编程)搬迁过来, 自己之前重新完善的<code>libevent</code>源码分析也会上传在网站上. 至于CSDN也不打算更新了, 前段时间还区修改了下以前排版的问题, 但拖了拖之后就放弃了.</p><a id="more"></a><br><h2 id="以前"><a href="#以前" class="headerlink" title="以前"></a>以前</h2><p>之前自己满腔热血的想把<code>CSAPP</code>, 操作系统, 计算机网络以及<code>linux</code>内核理解的知识做一个总结, 可惜卡死了.</p><p>那段时间看了<code>effective STL</code>, 有花了大部分时间又看了网络编程(感觉网络编程还没有学好). 然后一个多月的时间就过去了. 再加上学习课程安排, 自己时不时拖一下就到6月了.</p><br><h2 id="现在"><a href="#现在" class="headerlink" title="现在"></a>现在</h2><p>六月之后准备实习了, 这段时间出略的看了一个<code>go</code>语言的一些知识, 仅仅是把基础点过了一遍但还没有来得及练手. 估计现在也不怎么会了.</p><p>所以未来可能会总结一些go的用法吧.</p><br><h2 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h2><p>之后根据<code>nginx</code>学习的进度更新吧. 不过可惜的是自己<code>nginx</code>才看一很少的一部分, 加上工作的事今后博客更新的战线可能会拉长, 但我尽量保证质量.</p><p>顺便有时间在学习go吧. 感觉自己可能又会拖一下, 唉! <strong>后面还尽可能的还是激励自己放假时奋斗一下吧</strong>!</p>]]></content>
     
@@ -60,8 +60,8 @@
   
   <entry>
     <title>记录yilia主题搭建</title>
-    <link href="//rpz105.com//4ff0b4aa.html"/>
-    <id>//rpz105.com//4ff0b4aa.html</id>
+    <link href="//rpz105.com//blog/4ff0b4aa.html"/>
+    <id>//rpz105.com//blog/4ff0b4aa.html</id>
     <published>2019-06-09T07:35:43.000Z</published>
     <updated>2019-06-09T07:45:17.220Z</updated>
     
