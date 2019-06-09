@@ -171,6 +171,7 @@
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SGI STL将new的申请空间和调用构造函数的两个功能分开实现, 如果对new不太清楚的, 可以先去看看这一篇<a href="https://blog.csdn.net/Function_Dou/article/details/84526761">new实现</a>再来看配置器也不迟. 本节是STL分析的第一篇, 主要分析STL各个部分都会出现的<code>alloc</code>实现, 虽然每个部分都只会默认调用它, 不了解它也可以看懂分析,  但是他又是不可缺少的, 我们就以它做为开篇进行分析.</p>
         
       
 
@@ -184,6 +185,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">STL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -490,6 +506,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">STL</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">博客搭建</a>
