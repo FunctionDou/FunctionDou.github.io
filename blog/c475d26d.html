@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="那个叫西105的地方">
 <meta property="og:description" content="前言上一节我们分析了空间配置器对new的配置, 而STL将空间配置器分为了两级, 第一级是直接调用malloc分配空间, 调用free释放空间, 第二级三就是建立一个内存池, 小于128字节的申请都直接在内存池申请, 不直接调用malloc和free.  本节我们就先分析第一种空间配置器, 直接调用malloc, free, 而STL有是怎样的封装处理.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-27T16:21:40.257Z">
+<meta property="og:updated_time" content="2019-06-27T16:22:18.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="02 第一级配置器">
 <meta name="twitter:description" content="前言上一节我们分析了空间配置器对new的配置, 而STL将空间配置器分为了两级, 第一级是直接调用malloc分配空间, 调用free释放空间, 第二级三就是建立一个内存池, 小于128字节的申请都直接在内存池申请, 不直接调用malloc和free.  本节我们就先分析第一种空间配置器, 直接调用malloc, free, 而STL有是怎样的封装处理.">
@@ -385,6 +385,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/blog/26f25c98.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          03  第二级配置器
+        
+      </div>
+    </a>
   
   
     <a href="/blog/77212075.html" id="article-nav-older" class="article-nav-link-wrap">
