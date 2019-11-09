@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="那个叫西105的地方">
 <meta property="og:description" content="前言第一级配置器是直接调用malloc分配空间, 调用free释放空间, 第二级三就是建立一个内存池, 小于128字节的申请都直接在内存池申请, 不直接调用malloc和free. 本节分析第二级空间配置器, STL将第二级配置器设置为默认的配置器, 所以只要一次申请的空间不超过128kb就默认在内存池中申请空间, 超过才会调用第一级配置器.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-27T16:30:03.872Z">
+<meta property="og:updated_time" content="2019-07-21T05:18:09.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="03  第二级配置器">
 <meta name="twitter:description" content="前言第一级配置器是直接调用malloc分配空间, 调用free释放空间, 第二级三就是建立一个内存池, 小于128字节的申请都直接在内存池申请, 不直接调用malloc和free. 本节分析第二级空间配置器, STL将第二级配置器设置为默认的配置器, 所以只要一次申请的空间不超过128kb就默认在内存池中申请空间, 超过才会调用第一级配置器.">
@@ -229,7 +229,7 @@
 
 <br>
 
-<p>refill`内存填充.</p>
+<p><code>refill</code>内存填充.</p>
 <ul>
 <li><p>向内存池申请空间的起始地址</p>
 </li>
